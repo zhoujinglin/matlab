@@ -20,4 +20,14 @@ F = ifftshift(fft2(fftshift(Y)));
 subplot(1, 2, 1); colormap gray; imagesc(real(Y)); axis('image'); title('a curvelet: spatial viewpoint');
 subplot(1, 2, 2); colormap gray; imagesc(abs(F)); axis('image'); title('a curvelet: frequency viewpoint');
 
-[SX, SY, FX, FY, NX, NY] = fdct_wrapping(C);
+[SX, SY, FX, FY, NX, NY] = fdct_wrapping_param(C);
+
+% for s = 1:6
+%   w = 10;
+%   [A, B] = size(C{s}{w});
+%   a = ceil((A + 1)/2);
+%   b = ceil((B + 1)/2);
+%   C{s}{w}(a, b) = 1;
+%
+%   disp('Take adjoint curvelet transform: ifdct_wrapping s = ', s);
+% end
