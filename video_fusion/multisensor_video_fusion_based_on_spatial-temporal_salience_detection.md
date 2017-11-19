@@ -1,4 +1,4 @@
-<!-- <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script> -->
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 
 # 基于时空结构张量的视频融合(Multisensor video fusion based on spatial-temporal salience detection)
 
