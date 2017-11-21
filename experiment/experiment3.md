@@ -60,18 +60,75 @@ y_c = \frac{1}{A}\sum_{y = 0}^{N - 1}\sum_{x = 0}^{M-1}yf(x,y)
 #### 第一题
 
 ```matlab
+clear; close all; clc;
+%读取图像
+image = im2double(rgb2gray(imread('lena256.jpg')));
+[M, N] = size(image);
+sobel_x = [-1, 0, 1; -2, 0, 2; -1, 0, 1];
+sobel_y = [-1, -2, -1; 0, 0, 0; 1, 2, 1];
+%边缘检测
+image_sobel_x = imfilter(image, sobel_x, 'conv', 0, 'same');
+image_sobel_y = imfilter(image, sobel_y, 'conv', 0, 'same');
+image_sobel = sqrt(image_sobel_x.^2 + image_sobel_y.^2);
+figure(1);
+subplot(2, 2, 1); imshow(image); title('原图像');
+subplot(2, 2, 2); imshow(image_sobel_x); title('X方向梯度');
+subplot(2, 2, 3); imshow(image_sobel_y); title('Y方向梯度');
+subplot(2, 2, 4); imshow(image_sobel); title('边缘检测结果');
+% 二值化图像，取阈值为0.9；
+% level = graythresh(image);
+% image_sobel_binary = imbinarize(image_sobel, level);
+image_sobel_binary = zeros(M, N); level = 0.9;
+for i = 1:M
+  for j = 1:N
+    if image_sobel(i, j) > level
+      image_sobel_binary(i, j) = 1;
+    else
+      image_sobel_binary(i, j) = 0;
+    end
+  end
+end
+matlab_image_sobel = edge(image, 'sobel');
 
+figure(2);
+subplot(1, 2, 1); imshow(image_sobel_binary); title('自写程序边缘检测');
+subplot(1, 2, 2); imshow(matlab_image_sobel); title('自带函数边缘检测');
 ```
+
+![实验结果](exercise3_1_1.png)
+![实验结果](exercise3_1_2.png)
 
 #### 第二题
 
 ```matlab
-
+clear; close all; clc;
+%读取图像　取阈值为0.5
+image = im2double(imread('starshape.jpg'));
+[M, N] = size(image);
+level = 0.5;
+image_binary = imbinarize(image, level);
+size_image_binary = M*N - sum(sum(image_binary));
+% 计算质心的位置　并画出质心
+circle_x = 0; circle_y = 0;
+for i = 1:M
+  for j = 1:N
+    circle_x = circle_x + i*(1 - image_binary(i, j));
+    circle_y = circle_y + j*(1 - image_binary(i, j));
+  end
+end
+circle_x = circle_x/size_image_binary; circle_y = circle_y/size_image_binary;
+subplot(1, 2, 1); imshow(image); hold on; plot(circle_y, circle_x, 'ro'); title('原图(含质心)');
+subplot(1, 2, 2); imshow(image_binary); title('边缘检测');
 ```
+
+![实验结果](exercise3_2.png)
+**目标形状的面积为7846**
 
 ### 四、思考题
 
-1. 利用梯度算子与图像进行滤波（相关）运算后，为什么还需要给定阈值进行二
-值化处理？
+1. 利用梯度算子与图像进行滤波（相关）运算后，为什么还需要给定阈值进行二值化处理？
+答：滤波运算过后得到的只是图像像素灰度变换的梯度图，经过二值化处理才能得到有用的边界信息。
 2. Laplacian算子检测边缘为什么会产生双边效果？为什么不能检测出边的方向。
+答：Laplacian算子是对图像求二阶导数，二阶导数在灰度斜坡和灰度台阶过渡处产生双边效应。
 3. 相对其他边缘检测算子，Canny边缘检测算法的主要优势体现在哪里？
+答：失误率低；位置精度高；对每个边缘有唯一的响应。

@@ -1,11 +1,11 @@
 clear; close all; clc;
-
+%读取图像　取阈值为0.5
 image = im2double(imread('starshape.jpg'));
 [M, N] = size(image);
 level = 0.5;
 image_binary = imbinarize(image, level);
 size_image_binary = M*N - sum(sum(image_binary));
-
+% 计算质心的位置　并画出质心
 circle_x = 0; circle_y = 0;
 for i = 1:M
   for j = 1:N
