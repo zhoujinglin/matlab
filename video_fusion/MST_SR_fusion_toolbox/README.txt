@@ -22,7 +22,7 @@ dwt_fuse.m: Discrete wavelet transform (DWT)
 dtcwt_fuse.m: Dual-tree complex wavelet transform (DTCWT)
 cvt_fuse.m: Curvelet transform(CVT)
 nsct_fuse.m: Nonsubsampled contourlet transform (NSCT)
-sparse_fusion.m: Sparse representation (SR) (under the °∞sparsefusion°± folder)
+sparse_fusion.m: Sparse representation (SR) (under the ‚Äúsparsefusion‚Äù folder)
 lp_sr_fuse.m: LP-SR
 rp_sr_fused.m: RP-SR
 dwt_sr_fuse.m: DWT-SR
@@ -39,17 +39,17 @@ Therefore, the package is actually a new image fusion toolbox which contains man
 adb.m, dec.m, dec2.m, es.m, es2.m, selb.m, selc.m, undec.m, undec2.m, lp_fuse.m, rp_fuse.m
 
 In addition, Professor Shutao Li from Hunan university also helps us a lot, the implementations of DTCWT, CVT and NSCT methods in this toolbox are provided by his research group. The related code is used in their following paper:
-S. Li, B. Yang and J. Hu, °∞Performance comparison of different multi-resolution transforms for image fusion°±, Information Fusion, 2011. 
+S. Li, B. Yang and J. Hu, ‚ÄúPerformance comparison of different multi-resolution transforms for image fusion‚Äù, Information Fusion, 2011. 
 Moreover, several toolboxes about DTCWT, CVT and NSCT are required, and they have been contained in the package. These toolboxes can be downloaded from MATLAB CENTRAL.
 
-The ksvd toolbox in the °∞sparsefusion°± folder is downloaded from Dr. R. Rubinstein°Øs homepage: http://www.cs.technion.ac.il/~ronrubin/software.html. The function sparse_fusion.m is implemented by us based on the following paper:
-B. Yang and S. Li, °∞Multifocus image fusion and restoration with sparse representation°±, IEEE Transactions on Instrumentation and Measurement, 2010.
+The ksvd toolbox in the ‚Äúsparsefusion‚Äù folder is downloaded from Dr. R. Rubinstein‚Äôs homepage: http://www.cs.technion.ac.il/~ronrubin/software.html. The function sparse_fusion.m is implemented by us based on the following paper:
+B. Yang and S. Li, ‚ÄúMultifocus image fusion and restoration with sparse representation‚Äù, IEEE Transactions on Instrumentation and Measurement, 2010.
 
 We would like to thank Dr. Rockinger, Professor Li, and all the developers of the related MST and SR toolboxes for their contribution to our MST-SR image fusion toolbox.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Don°Øt hesitate to contact me if you meet any problems when using this toolbox.
+Don‚Äôt hesitate to contact me if you meet any problems when using this toolbox.
 Author: Yu Liu                                                            
 Email: liuyu1@mail.ustc.edu.cn; lyuxxz@163.com
 Homepage: http://home.ustc.edu.cn/~liuyu1
