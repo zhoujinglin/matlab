@@ -50,7 +50,7 @@ Sz = 384*[1 1 1];
 % configuration , the number of direction at each size of pyramid
 % total #direction is 3*Cf^2
 
-Cf = [3 3];
+% Cf = [3 3];
 
 Cf = [6 12;6 6;6 6];
 
@@ -83,11 +83,11 @@ snr(im,imr)
 % ---------------------------------------------------------
 
 tic
-ydec = ucurvdec3d(im, Cf, r, alpha);
+ydec = ucurvdec3d(im, Cf, r);
 toc
 
 tic
-imr = ucurvrec3d(ydec, Cf, r, alpha);
+imr = ucurvrec3d(ydec, Cf, r);
 toc
 
 snr(im,imr)
