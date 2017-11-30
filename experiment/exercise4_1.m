@@ -35,7 +35,7 @@ for i = 1:filecount
   end
   circle_x = circle_x/size_image_binary; circle_y = circle_y/size_image_binary;
   % 输出目标跟踪视频
-  imshow(image); hold on; plot (circle_y, circle_x, 'ro'); title(['Frame NO.' num2str(i)]);
+  imshow(image); hold on; plot (circle_y, circle_x, 'ro'); hold on; rectangle('Position',[circle_y - 32, circle_x - 18, 64, 32]); title(['Frame NO.' num2str(i)]);
   pause(0.01); hold off;
   % imshow([path filename]);
 end
