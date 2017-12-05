@@ -1,16 +1,17 @@
-close all; clear all;
-% 
+close all; clear;
+%
 disp(' ');
 disp(' ');
-disp(['In this demo, we demonstrate that 3-D ucurvelet']);
-disp(['is perfect reconstruction']);
+disp('In this demo, we demonstrate that 3-D ucurvelet');
+disp('is perfect reconstruction');
 disp(' ');
 
 rr = input('Press <enter> to continue ...');
+disp(rr);
 
 tic
 
-close all; clear all;
+close all; clear;
 % size of data cube
 Sz = [64 32 128];
 % configuration , the number of direction at each size of pyramid
@@ -37,11 +38,11 @@ imr = ucurvrec3d(ydec, Cf, F2);
 
 snr(im,imr)
 % ---------------------------------------------------------
-% 
+%
 disp(' ');
 disp(' ');
-disp(['Now we the 3-D ucurvelet sparse window version']);
-disp(['This version can run for large data cube']);
+disp('Now we the 3-D ucurvelet sparse window version');
+disp('This version can run for large data cube');
 disp(' ');
 
 rr = input('Press <enter> to continue ...');
@@ -61,7 +62,7 @@ alpha = 0.15;
 im = single(rand(Sz));
 
 tic
-% 3 sec for size 64 
+% 3 sec for size 64
 % 161 sec for size 256
 [F2, ind, cf] = ucurvwin3d_s(Sz, Cf, r, alpha);
 toc
@@ -91,4 +92,3 @@ imr = ucurvrec3d(ydec, Cf, r);
 toc
 
 snr(im,imr)
-

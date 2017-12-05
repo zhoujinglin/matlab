@@ -28,11 +28,15 @@ for k = 1:(Z - 1)
       end
     end
   end
+  if (k == 45 || k == 46)
+    mesh(absolute); title(['Frame NO.', num2str(k)]);
+    pause;
+  end
   absolute_min = min(min(absolute));
   [x, y] = find(absolute == absolute_min);
   template_location_x = template_location_x + x - search_x - 1; template_location_y = template_location_y + y - search_y -1;
   % 输出视频
-  imshow(video(:, :, k)); hold on; title(['Frame NO.',num2str(k)]);
+  imshow(video(:, :, k)); hold on; title(['Frame NO.', num2str(k)]);
   rectangle('Position', [template_location_y, template_location_x, template_size_y, template_size_x]);
   pause(0.01); hold off;
 end

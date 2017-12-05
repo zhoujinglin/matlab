@@ -1,5 +1,5 @@
 function [F2, ind2, cf] = ucurvwin3d_s(Sz, Cf, r, alpha)
-% UCURVWIN3D_S   Generate the sparse curvelet windows that used in 3-D 
+% UCURVWIN3D_S   Generate the sparse curvelet windows that used in 3-D
 % uniform curvelet inverse and foward transform
 %
 %	[F2, ind2, cf] = ucurvwin3d_s(Sz, Cf, r, alpha)
@@ -67,7 +67,7 @@ S3 = -1.5*pi:pi/(cs(3)/2):(0.5*pi-pi/(cs(3)/2));
 [M21, M23] =  adapt_grid(S1, S3);
 
 
-pack;
+% pack;
 
 % for each resolution estimation
 for inres = 2:Lt+1
@@ -88,7 +88,7 @@ for inres = 2:Lt+1
     FL3 = repmat(f1(:), [1, cs(2), cs(3)]).* ...
         permute(repmat(f2(:), [1, cs(1), cs(3)]),[2, 1, 3] ).* ...
         permute(repmat(f3(:), [1, cs(1), cs(2)]),[2, 3, 1]);
-    
+
     f1 = single(fun_meyer(abs(S1),[-2 -1 r(inres,:)]));
     f2 = single(fun_meyer(abs(S2),[-2 -1 r(inres,:)]));
     f3 = single(fun_meyer(abs(S3),[-2 -1 r(inres,:)]));
@@ -99,7 +99,7 @@ for inres = 2:Lt+1
 
     % high pass window
     FR3 = single(sqrt(FR3-FL3));
-    
+
     % low pass band ------------------------------------------------------
     %     if inres == 2
     %         FL = sqrt(circshift(FL3(1:cs(1),1:cs(2),1:cs(3)), 0.25*cs ));
@@ -110,9 +110,9 @@ for inres = 2:Lt+1
     % low pass band ------------------------------------------------------
     if inres == 2
         sbind = 1;
-        
+
         FL = sqrt(circshift(FL3, 0.25*cs ));
-        
+
         ind3 = find(FL);
         lind3 = length(ind3);
         % append index to ind2
@@ -123,7 +123,7 @@ for inres = 2:Lt+1
         % cf = [cf; cf(end,1)+lind3, inres, in1, in2, dir];
         % ind2 = find(FL);
         % F2 = FL(ind2);
-        
+
         cf(sbind, 1) = lind3;
         cf(sbind, 2:5) = [1 1 1 1];
         % cf = cf(:);
@@ -136,7 +136,7 @@ for inres = 2:Lt+1
     %   ang = angd*[-alpha alpha 1-alpha 1+alpha];
     %   angex = angd*[-2*alpha 2*alpha 1-2*alpha 1+2*alpha];
     alpha2 = alpha*4/(2*mncf);
-    
+
     for in = 1:3
         n = ncf(in);
         angd = 4/(2*n);
@@ -182,10 +182,10 @@ for inres = 2:Lt+1
     ind = find(and( and ((ang1>0),  (ang2>0)), (ang3>0) ));
     G1ex = ang1.^2 + ang2.^2 + ang3.^2;
     G1ex = sqrt(G1ex(ind));
-    
+
     clear ang1 ang2 ang3;
     % finish estimate ind and summation.
-    
+
     clear n
     for in = 1:3
         if (ncf(in) == 3)
@@ -214,7 +214,7 @@ for inres = 2:Lt+1
 
                         % F2{inres}{dir}{in1,in2} = F;
                         addwindow2(F, inres, in1, in2, dir);
-                        
+
                         if (in2~=ncf(3)+1-in2)
                         Fc = rotate_ucurv3d_nest(F, 3);
                         % F2{inres}{dir}{in1, ncf(3)+1-in2} = Fc;
@@ -226,7 +226,7 @@ for inres = 2:Lt+1
                         % F2{inres}{dir}{ncf(2)+1-in1,in2} = Fc;
                         addwindow2(Fc, inres, ncf(2)+1-in1, in2, dir);
                         end
-                        
+
                         if and(in1~=ncf(2)+1-in1, in2~=ncf(3)+1-in2)
                         Fc = rotate_ucurv3d_nest(F, [3 ,2]);
                         % F2{inres}{dir}{ncf(2)+1-in1,ncf(3)+1-in2} = Fc;
@@ -252,19 +252,19 @@ for inres = 2:Lt+1
 
                         % F2{inres}{dir}{in1,in2} = F;
                         addwindow2(F, inres, in1, in2, dir);
-                        
+
                         if (in2~=ncf(3)+1-in2)
                         Fc = rotate_ucurv3d_nest(F, 3);
                         % F2{inres}{dir}{in1, ncf(3)+1-in2} = Fc;
                         addwindow2(Fc, inres, in1, ncf(3)+1-in2, dir);
                         end
-                        
+
                         if (in1~=ncf(1)+1-in1)
                         Fc = rotate_ucurv3d_nest(F, 1);
                         % F2{inres}{dir}{ncf(1)+1-in1,in2} = Fc;
                         addwindow2(Fc, inres, ncf(1)+1-in1, in2, dir);
                         end
-                        
+
                         if and(in1~=ncf(1)+1-in1, in2~=ncf(3)+1-in2)
                         Fc = rotate_ucurv3d_nest(F, [3, 1]);
                         % F2{inres}{dir}{ncf(1)+1-in1,ncf(3)+1-in2} = Fc;
@@ -274,7 +274,7 @@ for inres = 2:Lt+1
                 end
 
             case {3}
-                
+
                 for in1 = 1:ncf2(1)
                     for in2 = 1:ncf2(2)
                         FA = permute(repmat(fang{3}{1}{in1},[1, 1, cs(2)]),[ 1 3 2]);
@@ -290,19 +290,19 @@ for inres = 2:Lt+1
 
                         % F2{inres}{dir}{in1,in2} = F;
                         addwindow2(F, inres, in1, in2, dir);
-                        
+
                         if (in2~=ncf(2)+1-in2)
                         Fc = rotate_ucurv3d_nest(F, 2);
                         % F2{inres}{dir}{in1, ncf(2)+1-in2} = Fc;
                         addwindow2(Fc, inres, in1, ncf(2)+1-in2, dir);
                         end
-                        
+
                         if (in1~=ncf(1)+1-in1)
                         Fc = rotate_ucurv3d_nest(F, 1);
                         % F2{inres}{dir}{ncf(1)+1-in1, in2} = Fc;
                         addwindow2(Fc, inres, ncf(1)+1-in1, in2, dir);
                         end
-                        
+
                         if and(in1~=ncf(1)+1-in1, in2~=ncf(2)+1-in2)
                         Fc = rotate_ucurv3d_nest(F, [1, 2]);
                         % F2{inres}{dir}{ncf(1)+1-in1,ncf(2)+1-in2} = Fc;
@@ -325,7 +325,7 @@ end
     function addwindow2(tmp,  inres, in1, in2, dir)
         sbind = sbind+1;
         % index and length
-        ind3 = find(tmp); % 
+        ind3 = find(tmp); %
         lind3 = length(ind3);
 
         % append index to ind2
@@ -342,7 +342,7 @@ end
 
 
 %--------------------------------------------------------------------------
-% utility functions 
+% utility functions
 %--------------------------------------------------------------------------
 
 % flip 3-D matrix function ------------------------------------------------
@@ -417,5 +417,3 @@ ind = [ind;ind2];
 F2 = [F2;tmp(ind2)];
 cf = [cf;length(F2), inres, in1, in2, dir];
 end
-
-
